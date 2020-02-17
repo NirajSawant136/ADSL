@@ -1,10 +1,10 @@
 #include <iostream>
 using namespace std;
 
-struct Node{
-
+struct Node
+{
 	char op;
-	Node *right,*left;
+	Node *right , *left;
 };
 
 class stack
@@ -28,7 +28,7 @@ class stack
 
 			int isempty(){
 
-				if(top == -1)
+				if(top==-1)
 					return 1;
 				else
 					return 0;
@@ -40,25 +40,24 @@ class stack
 			}
 };
 
-class Tree
-{
-	Node *root;
+class Tree{
 
-	public:
-			void create(){
+	private:Node *root;
+
+	public:	void create(){
 
 				Node *tr,*tt;
 				stack operand,optr;
 				char exp[20];
-				cout<<"\nEnter the infix expression -> ";
+				cout<<"\nEnter the Infix expression -> ";
 				cin>>exp;
 
 
-				for(int i = 0;exp[i] != '\0';i++){
+				for(int i=0;exp[i]!='\0';i++){
 
-					tr = new Node;
-					tr->op = exp[i];
-					tr->right = tr->left=NULL;
+					tr=new Node;
+					tr->op=exp[i];
+					tr->right=tr->left=NULL;
 					if(tr->op == '+'||tr->op == '-'||tr->op == '*'||tr->op == '/'){
 
 						if(optr.isempty())
@@ -67,11 +66,11 @@ class Tree
 
 						else{
 
-							if(precedence(exp[i])<=precedence(optr.TOP())){
+							if(precedence(exp[i]) <= precedence(optr.TOP())){
 
-										tt = optr.pop();
-										tt->right = operand.pop();
-										tt->left = operand.pop();
+										tt=optr.pop();
+										tt->right=operand.pop();
+										tt->left=operand.pop();
 										operand.push(tt);
 									}
 
@@ -86,17 +85,17 @@ class Tree
 
 				while(!optr.isempty()){
 
-					tt = optr.pop();
-					tt->right = operand.pop();
-					tt->left = operand.pop();
+					tt=optr.pop();
+					tt->right=operand.pop();
+					tt->left=operand.pop();
 					operand.push(tt);
 				}
 
-				root = tt;
+				root=tt;
 			}
 
 			int precedence(char x){
-
+				
 				switch(x){
 
 					case '+':	return 1;
@@ -116,67 +115,73 @@ class Tree
 
 			void postOrder(){
 
-				Node *cn = root;
+				Node *cn=root;
 				stack s1,s2;
 				s1.push(cn);
+
 				while(!s1.isempty()){
 
 					cn=s1.pop();
-					if(cn->left != NULL)
+					if(cn->left!=NULL)
 						s1.push(cn->left);
-					if(cn->right != NULL)
+					if(cn->right!=NULL)
 						s1.push(cn->right);
 					s2.push(cn);
 				}
 
 				while(!s2.isempty()){
 
-					cn = s2.pop();
+					cn=s2.pop();
 					cout<<cn->op;
 				}
+				cout<<endl;
 			}
 
 			void preOrder(){
 
 				stack s;
-				Node *cn = root;
+				Node *cn=root;
+
 				while(1){
 
-					while(cn != NULL){
+					while(cn!=NULL){
 
 						s.push(cn);
 						cout<<cn->op;
-						cn = cn->left;
+						cn=cn->left;
 					}
 					if(!s.isempty()){
 
-						cn = s.pop();
-						cn = cn->right;
+						cn=s.pop();
+						cn=cn->right;
 					}
 					else break;
 				}
+				cout<<endl;
 
 			}
 
 			void inOrder(){
 
 				stack s;
-				Node *cn = root;
+				Node *cn=root;
 				while(1){
 
-					while(cn != NULL){
+					while(cn!=NULL){
 
 						s.push(cn);
 						cn=cn->left;
 					}
 					if(!s.isempty()){
 
-						cn = s.pop();
+						cn=s.pop();
 						cout<<cn->op;
-						cn = cn->right;
+						cn=cn->right;
 					}
-					else break;
+					else 
+						break;
 				}
+				cout<<endl;
 			}
 
 };
@@ -186,19 +191,20 @@ int main(){
 	Tree T;
 	int choice;
 		do{
-
-			cout<<"\n1) ENTER INFIX EXPRESSION ";
-			cout<<"\n2) POSTFIX TRAVERSAL";
-			cout<<"\n3) PREFIX TRAVERSAL";
-			cout<<"\n4) INFIX TRAVERSAL";
-			cout<<"\n5) EXIT";
-			cout<<"\n\nEnter your choice:";
+			
+			cout<<"\n1.ENTER INFIX EXPRESSION -> ";
+			cout<<"\n2.POSTFIX TRAVERSAL";
+			cout<<"\n3.PREFIX TRAVERSAL";
+			cout<<"\n4.INFIX TRAVERSAL";
+			cout<<"\n5.EXIT";
+			cout<<"\n\nEnter your choice -> ";
 			cin>>choice;
 
 			switch(choice){
 
 				case 1: T.create();
 						break;
+
 				case 2:	cout<<"\nPOSTFIX -> ";
 						T.postOrder();
 						break;
@@ -216,8 +222,7 @@ int main(){
 				default: cout<<"\nEnter valid choice!";
 			}
 
-		}while(choice != 5);
+		}while(choice!=5);
 
 	return 0;
 }
-
