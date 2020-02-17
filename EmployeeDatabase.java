@@ -59,18 +59,17 @@ public class EmployeeDatabase{
 						break;
 						
 				case 2: System.out.println("Enter employee name -> ");
-						p.nextLine();
-						p.close();
-							for(int i=1; i<no; i++){
+					p.nextLine();
+					p.close();
+					for(int i=1; i<no; i++){
 						
-								if( name == emp[i].getName()){
+						if( name == emp[i].getName()){
 									
-									emp[i].showDetails();
-									break;
-								}
-							}
-							System.out.println(name + "not found in database");
-		
+							emp[i].showDetails();
+							break;
+						}
+					}
+					System.out.println(name + "not found in database");
 			}
 			
 		}
